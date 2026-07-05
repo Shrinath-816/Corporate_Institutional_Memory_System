@@ -1,0 +1,130 @@
+# ============================================================
+# Institutional Memory System — .gitignore
+# ============================================================
+
+# ── Environment & Secrets ────────────────────────────────────
+.env
+.env.local
+.env.production
+.env.staging
+*.pem
+*.key
+*.cert
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.so
+
+# ── Virtual Environments ─────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+myvenv/
+
+
+# ── Distribution / Build ─────────────────────────────────────
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+pip-wheel-metadata/
+
+# ── Testing & Coverage ───────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+.hypothesis/
+test-results/
+
+# ── Type Checking ────────────────────────────────────────────
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# ── Jupyter Notebooks ────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── Data Files ───────────────────────────────────────────────
+data/raw/
+data/processed/
+data/synthetic/
+*.csv
+*.json
+*.parquet
+*.pkl
+*.pickle
+
+# ── Vector Database ──────────────────────────────────────────
+chroma_db/
+*.chroma
+chromadb/
+
+# ── Logs ────────────────────────────────────────────────────
+logs/
+*.log
+*.log.*
+
+# ── IDE & Editors ────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ── OS Files ─────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── Docker ───────────────────────────────────────────────────
+.docker/
+
+# ── FastAPI / Uvicorn ────────────────────────────────────────
+.uvicorn/
+
+# ── Streamlit ────────────────────────────────────────────────
+.streamlit/secrets.toml
+
+# ── Model Cache ──────────────────────────────────────────────
+# HuggingFace & SentenceTransformers cache
+.cache/
+models/
+*.bin
+*.safetensors
+*.onnx
+*.pt
+*.pth
+
+# ── Temporary Files ──────────────────────────────────────────
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
