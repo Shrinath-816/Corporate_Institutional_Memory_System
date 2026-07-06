@@ -63,3 +63,5 @@ httpx>=0.28.1
 # ── Optional: Audio Transcription ───────────────────────────
 # Uncomment only when building meeting transcription agent
 # openai-whisper>=20231117          # Also requires: pip install ffmpeg
+
+pandas
