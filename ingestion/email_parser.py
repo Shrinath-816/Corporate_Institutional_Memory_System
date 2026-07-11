@@ -307,7 +307,7 @@ def load_and_parse_emails(
             path,
             names=["file", "message"],
             encoding="utf-8",
-            errors="ignore",
+            on_bad_lines="skip",
             nrows=limit,
         )
     except FileNotFoundError:

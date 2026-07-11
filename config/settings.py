@@ -15,15 +15,15 @@ Workflow:
     3. All modules import the singleton `settings` object for configuration access.
 """
 
-from pydantic_settings import BaseSettings
-from pydantic import Field, validator
+from pydantic_settings import BaseSettings,SettingsConfigDict
+from pydantic import Field,field_validator, BaseModel
 from typing import Optional
 
 
 class GeminiSettings(BaseSettings):
     """Configuration for Google Gemini LLM API."""
 
-    api_key: str = Field(..., env="GOOGLE_API_KEY", description="Google Gemini API key")
+    api_key: str = Field(..., alias="google_api_key")
     model: str = Field(
         default="gemini-2.5-flash",
         env="GEMINI_MODEL",
@@ -228,7 +228,8 @@ class Settings(BaseSettings):
     api: APISettings = Field(default_factory=APISettings)
     logging: LoggingSettings = Field(default_factory=LoggingSettings)
 
-    @validator("environment")
+    @field_validator("environment")
+    @classmethod
     def validate_environment(cls, value: str) -> str:
         """Validates that environment is one of the allowed values.
 
