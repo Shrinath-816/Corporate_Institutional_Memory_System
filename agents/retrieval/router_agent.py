@@ -131,29 +131,29 @@ class RouterAgent(BaseAgent):
             The complete classification prompt string.
         """
         return f"""
-You are a Query Router for a Corporate Institutional Memory System.
-Your sole task is to classify the user query into exactly one category.
+        You are a Query Router for a Corporate Institutional Memory System.
+        Your sole task is to classify the user query into exactly one category.
 
-CATEGORY DEFINITIONS:
-{_CATEGORY_DEFINITIONS}
+        CATEGORY DEFINITIONS:
+        {_CATEGORY_DEFINITIONS}
 
-USER QUERY:
-{query}
+        USER QUERY:
+        {query}
 
-INSTRUCTIONS:
-1. Read the query carefully and identify its primary intent.
-2. Select the single most appropriate category from:
-   DECISION, PEOPLE, PROJECT, POLICY, UNKNOWN
-3. Assign a confidence score between 0.0 and 1.0.
-4. Write one sentence explaining your reasoning.
-5. If confidence is below 0.75, suggest a fallback category.
+        INSTRUCTIONS:
+        1. Read the query carefully and identify its primary intent.
+        2. Select the single most appropriate category from:
+        DECISION, PEOPLE, PROJECT, POLICY, UNKNOWN
+        3. Assign a confidence score between 0.0 and 1.0.
+        4. Write one sentence explaining your reasoning.
+        5. If confidence is below 0.75, suggest a fallback category.
 
-Respond in this EXACT format — no extra text:
-CATEGORY: <category>
-CONFIDENCE: <score>
-REASONING: <one sentence>
-FALLBACK: <category or NONE>
-""".strip()
+        Respond in this EXACT format — no extra text:
+        CATEGORY: <category>
+        CONFIDENCE: <score>
+        REASONING: <one sentence>
+        FALLBACK: <category or NONE>
+        """.strip()
 
     def _parse_llm_response(self, response: str, query: str) -> RouterOutput:
         """Parses the structured LLM classification response.
