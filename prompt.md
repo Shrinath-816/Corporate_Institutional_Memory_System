@@ -4,7 +4,7 @@ You are continuing the architecture documentation of an enterprise-grade distrib
 
 IMPORTANT
 
-This is **Part 2** of the **Token-Vault.md** documentation.
+This is **Part 3** of the **Token-Vault.md** documentation.
 
 The following architecture documents already exist and MUST be treated as the source of truth.
 
@@ -14,6 +14,7 @@ The following architecture documents already exist and MUST be treated as the so
 • API-Gateway.md
 • Merchant-Service.md
 • Token-Vault.md (Part 1)
+• Token-Vault.md (Part 2)
 
 Do NOT redesign the architecture.
 
@@ -70,15 +71,15 @@ YOUR TASK
 
 Continue the Token-Vault.md documentation.
 
-This is Part 2.
+This is Part 3.
 
-Do NOT repeat Part 1.
+Do NOT repeat any previous sections.
 
 Generate only architecture documentation in Markdown.
 
 Do NOT generate Java code.
 
-Do NOT generate SQL.
+Do NOT generate SQL scripts.
 
 Do NOT generate Dockerfiles.
 
@@ -90,281 +91,347 @@ Do NOT generate implementation code.
 
 Generate ONLY the following sections.
 
-# REST API Specification
+# Database Architecture
 
-Provide a complete REST API specification.
+Design a production-grade database architecture for the Token Vault.
+
+Explain:
+
+• Database responsibilities
+• Logical database architecture
+• Physical database architecture
+• Entity relationships
+• Normalization strategy
+• Data ownership
+• Data lifecycle
+• Storage strategy
+• Transaction boundaries
+• ACID guarantees
+• High availability
+• Read/Write patterns
+• Replication strategy
+• Read replicas
+• Partitioning
+• Sharding considerations
+• Archival strategy
+• Backup strategy
+• Recovery strategy
+
+Include Mermaid ER diagrams and architecture diagrams.
+
+------------------------------------------------------------
+
+# Database Schema Design
+
+Describe every table conceptually.
 
 Include:
 
-• API design principles
-• API versioning strategy
-• URI naming conventions
-• HTTP methods
-• Resource hierarchy
-• Request lifecycle
-• Response standards
-• Error handling strategy
-• Pagination (if applicable)
-• Filtering
-• Sorting
-• Correlation IDs
-• Idempotency headers
-• Request tracing
-• Retry behavior
+• Token records
+• Vault metadata
+• Encryption metadata
+• Key metadata
+• Audit records
+• Access history
+• Rotation history
+• Service configuration
+• System metadata
 
-Document every endpoint in detail, including:
+For each entity explain:
 
 • Purpose
-• Request structure
-• Response structure
-• HTTP status codes
-• Error responses
-• Validation rules
-• Security requirements
-• Rate limiting behavior
+• Relationships
+• Ownership
+• Constraints
+• Lifecycle
 
-Use tables wherever appropriate.
+Do not write SQL.
 
 ------------------------------------------------------------
 
-# Authentication
-
-Provide a complete authentication architecture.
+# Indexing Strategy
 
 Explain:
 
-• OAuth2
-• JWT
-• Mutual TLS (mTLS)
-• Service-to-Service Authentication
-• Internal Authentication
-• API Gateway Authentication Flow
-• Token Validation
-• Certificate Validation
-• Identity Propagation
-• Trust Relationships
-• Authentication Failure Handling
-
-Explain why each authentication mechanism is required.
+• Primary indexes
+• Secondary indexes
+• Composite indexes
+• Lookup optimization
+• Read optimization
+• Write optimization
+• Index maintenance
+• Trade-offs
 
 ------------------------------------------------------------
 
-# Authorization
+# Redis Architecture
 
-Provide a complete authorization model.
-
-Explain:
-
-• RBAC
-• ABAC
-• Service Roles
-• Least Privilege Principle
-• Internal Service Permissions
-• Merchant Permissions
-• Administrator Permissions
-• Vault Access Policies
-• Fine-Grained Access Control
-• Access Decision Flow
-• Authorization Failure Handling
-
-Include authorization decision flow diagrams.
-
-------------------------------------------------------------
-
-# Token Generation
-
-Explain the complete token generation lifecycle.
-
-Include:
-
-• PAN Validation
-• Secure Random Token Generation
-• Token Format
-• Token Uniqueness
-• Collision Prevention
-• Metadata Association
-• Token Persistence
-• Encryption Workflow
-• Audit Logging
-• Response Generation
-
-Explain why each step exists.
-
-Provide Mermaid sequence diagrams.
-
-------------------------------------------------------------
-
-# Detokenization
-
-Explain the secure detokenization process.
+Explain how Redis is used.
 
 Cover:
 
-• Authorization checks
-• Authentication verification
-• Policy validation
-• Secure retrieval
-• Decryption workflow
-• Response generation
-• Audit logging
-• Error handling
-• Failure scenarios
-• Abuse prevention
-
-Clearly explain when detokenization is allowed and when it must be rejected.
-
-Provide Mermaid sequence diagrams.
-
-------------------------------------------------------------
-
-# PCI DSS Compliance
-
-Provide an enterprise-grade PCI DSS architecture section.
-
-Explain:
-
-• PCI DSS scope
-• Cardholder Data Environment (CDE)
-• PAN protection
-• Data masking
-• Data retention
-• Secure deletion
-• Audit requirements
-• Access control
-• Network segmentation
-• Logging
-• Monitoring
-• Vulnerability management
-• Security testing
-• Compliance boundaries
-• Risk mitigation
-• Compliance responsibilities
-
-Explain how the Token Vault supports PCI DSS certification.
-
-------------------------------------------------------------
-
-# KMS / HSM Integration
-
-Explain in detail:
-
-• Why HSM is required
-• Why KMS is required
-• Key hierarchy
-• Root Keys
-• Master Keys
-• Data Encryption Keys (DEK)
-• Key Encryption Keys (KEK)
-• Envelope Encryption
-• Key generation
-• Key storage
-• Key usage
-• Key retrieval
-• Key protection
-• Key archival
-• Key destruction
-• Disaster recovery
+• Cache responsibilities
+• Token metadata cache
+• Configuration cache
+• Session cache
+• Distributed locks
+• Rate limiting support
+• Temporary data
+• TTL strategy
+• Cache consistency
+• Cache invalidation
+• Cache warming
+• Cache eviction
 • High availability
-• Failover
-• Vendor-neutral architecture
+• Redis Cluster
+• Redis Sentinel
+• Failure handling
 
 Provide architecture diagrams.
 
 ------------------------------------------------------------
 
-# Cryptographic Standards
+# Kafka Architecture
 
-Explain all cryptographic decisions.
-
-Include:
-
-• AES-256
-• RSA
-• ECC
-• SHA-256
-• SHA-512
-• HMAC
-• Digital Signatures
-• Secure Random Number Generation
-• Key Length Selection
-• Encryption Modes
-• Hashing Strategy
-• Salting
-• Nonces
-• Initialization Vectors
-• Cryptographic Best Practices
-
-Explain WHY each algorithm is selected.
-
-Discuss trade-offs.
-
-------------------------------------------------------------
-
-# Key Rotation
-
-Explain the complete key lifecycle.
+Explain the complete messaging architecture.
 
 Include:
 
-• Key creation
-• Key activation
-• Key usage
-• Scheduled rotation
-• Emergency rotation
-• Key retirement
-• Key archival
-• Key destruction
-• Key migration
-• Zero-downtime rotation
-• Rotation verification
-• Rollback strategy
-• Disaster scenarios
+• Why Kafka is required
+• Event-driven communication
+• Topic design
+• Topic naming standards
+• Partitions
+• Replication factor
+• Consumer groups
+• Producer strategy
+• Ordering guarantees
+• Delivery guarantees
+• Idempotent producers
+• Exactly-once semantics
+• Retry topics
+• Dead Letter Queues
+• Message retention
+• Replay strategy
 
-Provide detailed Mermaid sequence diagrams.
-
-------------------------------------------------------------
-
-# Validation Strategy
-
-Explain validation at every layer.
-
-Include:
-
-• Input validation
-• Request validation
-• Payload validation
-• Merchant validation
-• Authentication validation
-• Authorization validation
-• Token validation
-• PAN validation
-• Metadata validation
-• API validation
-• Header validation
-• Certificate validation
-• Business rule validation
-
-Describe validation order and failure handling.
+Provide Mermaid diagrams.
 
 ------------------------------------------------------------
 
-# Sequence Diagrams
+# Events
 
-Provide detailed Mermaid sequence diagrams for:
+Document every domain event.
 
-• Token Generation
-• Token Retrieval
-• Detokenization
-• Authentication Flow
-• Authorization Flow
-• KMS Interaction
-• HSM Interaction
-• Key Rotation
-• Audit Logging
-• Error Handling
-• Unauthorized Access Attempt
-• Service-to-Service Communication
-• API Gateway to Token Vault Flow
+Examples include:
+
+• TokenCreated
+• TokenRetrieved
+• TokenRotated
+• TokenExpired
+• TokenRevoked
+• VaultInitialized
+• VaultRecovered
+• KeyCreated
+• KeyRotated
+• KeyExpired
+• UnauthorizedAccessDetected
+• AuditEventGenerated
+
+For every event include:
+
+• Purpose
+• Producer
+• Consumers
+• Payload description
+• Trigger conditions
+• Ordering requirements
+• Reliability requirements
+
+Include an Event Catalog table.
+
+------------------------------------------------------------
+
+# Performance Architecture
+
+Design for 10,000+ concurrent requests/sec.
+
+Explain:
+
+• Performance goals
+• Throughput targets
+• Latency targets
+• Bottleneck analysis
+• Database optimization
+• Cache optimization
+• Thread utilization
+• Async processing
+• Connection pooling
+• Memory optimization
+• CPU optimization
+• Network optimization
+• Serialization optimization
+• Encryption performance
+• Benchmark strategy
+
+Discuss trade-offs and architectural decisions.
+
+------------------------------------------------------------
+
+# Scaling Strategy
+
+Explain:
+
+• Horizontal scaling
+• Vertical scaling
+• Stateless service design
+• Kubernetes auto-scaling
+• Load balancing
+• Service discovery
+• Traffic distribution
+• Multi-instance deployment
+• Capacity planning
+• Scaling bottlenecks
+• Cloud-native scaling
+• Multi-region readiness
+
+Provide Mermaid deployment diagrams.
+
+------------------------------------------------------------
+
+# Caching Strategy
+
+Explain:
+
+• Cache hierarchy
+• Cache-aside pattern
+• Read-through cache
+• Write-through cache
+• Write-behind cache
+• Cache consistency
+• Cache invalidation
+• TTL strategy
+• Hot key mitigation
+• Cache penetration
+• Cache stampede prevention
+• Cache avalanche prevention
+
+Explain why each strategy is selected.
+
+------------------------------------------------------------
+
+# Logging Architecture
+
+Design a centralized logging strategy.
+
+Explain:
+
+• Structured logging
+• JSON logging
+• Correlation IDs
+• Trace IDs
+• Request IDs
+• Security logging
+• Audit logging
+• Error logging
+• Business logging
+• Log aggregation
+• Log retention
+• Sensitive data masking
+• PCI-compliant logging
+
+Provide sample log structures conceptually (not code).
+
+------------------------------------------------------------
+
+# Metrics
+
+Design a complete monitoring strategy.
+
+Explain:
+
+Business Metrics
+
+Operational Metrics
+
+Infrastructure Metrics
+
+Security Metrics
+
+Application Metrics
+
+Examples:
+
+• Token generation rate
+• Detokenization rate
+• Vault latency
+• Encryption latency
+• Cache hit ratio
+• Database latency
+• Kafka lag
+• API latency
+• Authentication failures
+• Authorization failures
+• CPU
+• Memory
+• Disk
+• Network
+• JVM metrics
+
+Explain dashboards and alert thresholds.
+
+------------------------------------------------------------
+
+# Distributed Tracing
+
+Explain the tracing architecture.
+
+Cover:
+
+• OpenTelemetry
+• Trace propagation
+• Span hierarchy
+• Context propagation
+• Parent/Child spans
+• Cross-service tracing
+• API Gateway traces
+• Merchant Service traces
+• Token Vault traces
+• Kafka traces
+• Database traces
+• Redis traces
+• KMS/HSM traces
+
+Explain troubleshooting workflows.
+
+Provide Mermaid sequence diagrams.
+
+------------------------------------------------------------
+
+# Disaster Recovery
+
+Design an enterprise disaster recovery strategy.
+
+Explain:
+
+• Recovery objectives
+• RTO
+• RPO
+• Backup frequency
+• Point-in-time recovery
+• Multi-AZ deployment
+• Multi-region deployment
+• Failover
+• Failback
+• Data replication
+• Vault recovery
+• Key recovery
+• Kafka recovery
+• Redis recovery
+• Database recovery
+• Disaster testing
+• Business continuity planning
+
+Provide architecture diagrams and recovery workflows.
 
 ------------------------------------------------------------
 
@@ -390,4 +457,4 @@ Use Mermaid diagrams wherever appropriate.
 
 The objective is to eliminate ambiguity so another AI can later generate production-ready code directly from this specification.
 
-Output ONLY the Markdown for **Token-Vault.md (Part 2)**.
+Output ONLY the Markdown for **Token-Vault.md (Part 3)**.
