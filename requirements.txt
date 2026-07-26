@@ -65,3 +65,4 @@ httpx>=0.28.1
 # openai-whisper>=20231117          # Also requires: pip install ffmpeg
 
 pandas
+torchvision

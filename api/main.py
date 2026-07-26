@@ -78,6 +78,8 @@ def create_app() -> FastAPI:
     Returns:
         A fully configured FastAPI application instance.
     """
+    
+    
     app = FastAPI(
         title=settings.app_name,
         description=(
@@ -174,6 +176,11 @@ app = create_app()
 if __name__ == "__main__":
     """Allows running the API directly via: python -m api.main"""
     import uvicorn
+    from pathlib import Path
+    
+    logger.info("Current Working Directory:", Path.cwd())
+    logger.info(".env exists:", Path(".env").exists())
+    logger.info(".env absolute path:", Path(".env").resolve())
 
     uvicorn.run(
         "api.main:app",

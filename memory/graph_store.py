@@ -61,6 +61,7 @@ class GraphStore:
             "Connecting to Neo4j | uri='{}'",
             settings.neo4j.uri,
         )
+        
 
         try:
             self._driver: Driver = GraphDatabase.driver(

@@ -15,6 +15,8 @@ Workflow:
     3. All modules import the singleton `settings` object for configuration access.
 """
 
+from chromadb.config import logger
+from loguru import logger
 from pydantic_settings import BaseSettings,SettingsConfigDict
 from pydantic import Field,field_validator, BaseModel
 from typing import Optional
@@ -40,9 +42,10 @@ class GeminiSettings(BaseSettings):
         description="Maximum tokens in LLM response"
     )
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+    env_file=".env",
+    extra="ignore",
+    )
 
 
 class ChromaDBSettings(BaseSettings):
@@ -69,39 +72,43 @@ class ChromaDBSettings(BaseSettings):
         description="Number of top results to retrieve from vector search"
     )
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+    env_file=".env",
+    extra="ignore",
+    )
 
 
 class Neo4jSettings(BaseSettings):
     """Configuration for Neo4j graph database."""
 
-    uri: str = Field(
-        default="bolt://localhost:7687",
-        env="NEO4J_URI",
-        description="Neo4j connection URI"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        extra="ignore",
     )
+
+    uri: str = Field(
+        default="neo4j://127.0.0.1:7687",
+        validation_alias="NEO4J_URI",
+        description="Neo4j connection URI",
+    )
+
     username: str = Field(
         default="neo4j",
-        env="NEO4J_USERNAME",
-        description="Neo4j authentication username"
+        validation_alias="NEO4J_USERNAME",
+        description="Neo4j authentication username",
     )
+
     password: str = Field(
         default="password",
-        env="NEO4J_PASSWORD",
-        description="Neo4j authentication password"
+        validation_alias="NEO4J_PASSWORD",
+        description="Neo4j authentication password",
     )
+
     database: str = Field(
-        default="neo4j",
-        env="NEO4J_DATABASE",
-        description="Neo4j target database name"
+        default="institutionalmemorysystem",
+        validation_alias="NEO4J_DATABASE",
+        description="Neo4j target database name",
     )
-
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
-
 
 class DataSettings(BaseSettings):
     """Configuration for data ingestion and storage paths."""
@@ -137,9 +144,10 @@ class DataSettings(BaseSettings):
         description="Maximum number of emails to ingest into the system"
     )
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+    env_file=".env",
+    extra="ignore",
+    )
 
 
 class APISettings(BaseSettings):
@@ -171,9 +179,10 @@ class APISettings(BaseSettings):
         description="Secret key for JWT token signing"
     )
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+    env_file=".env",
+    extra="ignore",
+    )
 
 
 class LoggingSettings(BaseSettings):
@@ -195,10 +204,10 @@ class LoggingSettings(BaseSettings):
         description="Path to log file. If None, logs only to stdout."
     )
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
-
+    model_config = SettingsConfigDict(
+    env_file=".env",
+    extra="ignore",
+    )
 
 class Settings(BaseSettings):
     """
@@ -247,12 +256,14 @@ class Settings(BaseSettings):
             raise ValueError(f"environment must be one of {allowed}, got '{value}'")
         return value.lower()
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+    env_file=".env",
+    extra="ignore",
+    )
 
 
 # ---------------------------------------------------------------------------
 # Singleton instance — import this across all modules
 # ---------------------------------------------------------------------------
 settings = Settings()
+
